@@ -134,7 +134,31 @@ The encryption key is derived from the OpenCloud user ID and the salt. This mean
 
 > **Note:** This encryption protects credentials at rest in the browser storage (e.g. against casual inspection or data exports). It does not protect against JavaScript running in the same origin (e.g. XSS attacks or malicious browser extensions), since the key material is also accessible in the browser context.
 
-## Roundcube configuration
+## Roundcube setup
+
+### Autologin endpoint
+
+This extension requires an `autologin.php` endpoint on the Roundcube side. The file is included in this repository at [`dev/docker/roundcube/autologin.php`](dev/docker/roundcube/autologin.php).
+
+**Installation:**
+
+1. Copy `autologin.php` into the Roundcube **public web root** (the directory containing `index.php`):
+
+   ```bash
+   cp dev/docker/roundcube/autologin.php /var/www/roundcube/public_html/autologin.php
+   ```
+
+   The exact path depends on your Roundcube installation. Common locations are `/var/www/roundcube/public_html/`, `/var/www/html/`, or `/usr/share/roundcube/`.
+
+2. Edit `autologin.php` and set `SHARED_SECRET` to a strong random value:
+
+   ```php
+   define('SHARED_SECRET', 'your-strong-random-secret');
+   ```
+
+   This secret must match the `sharedSecret` configured in the OpenCloud `manifest.json` for the corresponding instance.
+
+3. Verify that the endpoint is reachable at `https://your-roundcube-url/autologin.php`.
 
 ### Session lifetime
 

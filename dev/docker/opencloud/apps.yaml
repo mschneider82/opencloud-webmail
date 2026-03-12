@@ -1,0 +1,8 @@
+webmail:
+  config:
+    instances:
+      - id: rc-primary
+        label: Main Mailserver
+        roundcubeUrl: https://host.docker.internal:9443
+        sharedSecret: dev-secret-change-me
+        description: Development Roundcube instance

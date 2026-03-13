@@ -138,6 +138,8 @@ The encryption key is derived from the OpenCloud user ID and the salt. This mean
 
 [roundcube-opencloud-plugin](https://github.com/mschneider82/roundcube_opencloud_plugin) — Roundcube plugin that lets each user connect their personal OpenCloud Space directly from within Roundcube: save email attachments to the cloud or attach files from it.
 
+**Article:** [From Seafile to OpenCloud: Building a Self-Hosted Webmail & Cloud Integration on Kubernetes](https://medium.com/@matthias2handy/from-seafile-to-opencloud-building-a-self-hosted-webmail-cloud-integration-on-kubernetes-a4f3bb795d6f) — background, motivation, and full setup walkthrough.
+
 ## Roundcube setup
 
 ### Autologin endpoint

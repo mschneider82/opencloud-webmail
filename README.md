@@ -134,6 +134,10 @@ The encryption key is derived from the OpenCloud user ID and the salt. This mean
 
 > **Note:** This encryption protects credentials at rest in the browser storage (e.g. against casual inspection or data exports). It does not protect against JavaScript running in the same origin (e.g. XSS attacks or malicious browser extensions), since the key material is also accessible in the browser context.
 
+## Related
+
+[roundcube-opencloud-plugin](https://github.com/mschneider82/roundcube_opencloud_plugin) — Roundcube plugin that lets each user connect their personal OpenCloud Space directly from within Roundcube: save email attachments to the cloud or attach files from it.
+
 ## Roundcube setup
 
 ### Autologin endpoint

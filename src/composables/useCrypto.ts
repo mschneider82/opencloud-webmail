@@ -1,4 +1,6 @@
-const STORAGE_SALT_KEY = 'webmail:encryption-salt'
+function saltKey(userId: string): string {
+  return `webmail:encryption-salt:${userId}`
+}
 
 export function base64UrlEncode(buffer: ArrayBuffer | Uint8Array): string {
   const bytes = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer)
@@ -68,13 +70,14 @@ async function deriveKey(userId: string, salt: Uint8Array): Promise<CryptoKey> {
   )
 }
 
-export function getOrCreateSalt(): Uint8Array {
-  const stored = localStorage.getItem(STORAGE_SALT_KEY)
+export function getOrCreateSalt(userId: string): Uint8Array {
+  const key = saltKey(userId)
+  const stored = localStorage.getItem(key)
   if (stored) {
     return base64Decode(stored)
   }
   const salt = crypto.getRandomValues(new Uint8Array(16))
-  localStorage.setItem(STORAGE_SALT_KEY, base64Encode(salt))
+  localStorage.setItem(key, base64Encode(salt))
   return salt
 }
 

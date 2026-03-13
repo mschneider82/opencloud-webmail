@@ -38,7 +38,7 @@ export const useMailAccountStore = defineStore('webmail-accounts', () => {
     imapUser: string,
     imapPass: string
   ): Promise<MailAccount> {
-    const salt = getOrCreateSalt()
+    const salt = getOrCreateSalt(userId.value)
     const { ciphertext, iv } = await encryptPassword(imapPass, userId.value, salt)
     const now = new Date().toISOString()
     const account: MailAccount = {
@@ -70,7 +70,7 @@ export const useMailAccountStore = defineStore('webmail-accounts', () => {
       account.roundcubeInstanceId = updates.roundcubeInstanceId
     if (updates.imapUser !== undefined) account.imapUser = updates.imapUser
     if (updates.imapPass !== undefined) {
-      const salt = getOrCreateSalt()
+      const salt = getOrCreateSalt(userId.value)
       const { ciphertext, iv } = await encryptPassword(updates.imapPass, userId.value, salt)
       account.encryptedImapPass = ciphertext
       account.iv = iv
@@ -87,7 +87,7 @@ export const useMailAccountStore = defineStore('webmail-accounts', () => {
   }
 
   async function getDecryptedPassword(account: MailAccount): Promise<string> {
-    const salt = getOrCreateSalt()
+    const salt = getOrCreateSalt(userId.value)
     return await decryptPassword(account.encryptedImapPass, account.iv, userId.value, salt)
   }
 

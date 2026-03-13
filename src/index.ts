@@ -5,6 +5,7 @@ import {
   type AccountExtension,
   type Extension
 } from '@opencloud-eu/web-pkg'
+import { watch } from 'vue'
 import { urlJoin } from '@opencloud-eu/web-client'
 import '@opencloud-eu/extension-sdk/tailwind.css'
 import { computed } from 'vue'
@@ -79,10 +80,18 @@ export default defineWebApplication({
       extensions,
       ready() {
         const userStore = useUserStore()
+        const accountStore = useMailAccountStore()
         if (userStore.user?.id) {
-          const accountStore = useMailAccountStore()
           accountStore.load(userStore.user.id)
         }
+        watch(
+          () => userStore.user?.id,
+          (newId) => {
+            if (newId) {
+              accountStore.load(newId)
+            }
+          }
+        )
       }
     }
   }

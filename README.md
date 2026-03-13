@@ -127,7 +127,7 @@ IMAP passwords are **never stored in plain text** in the browser. Before being w
 
 - **AES-256-GCM** for authenticated encryption
 - **PBKDF2** with SHA-256 and 100,000 iterations for key derivation
-- A random **16-byte salt** (generated once per browser, stored in localStorage)
+- A random **16-byte salt** (generated once per OpenCloud user, stored in localStorage keyed by user ID)
 - A random **12-byte IV** per encryption operation
 
 The encryption key is derived from the OpenCloud user ID and the salt. This means the encrypted passwords are bound to the specific user session and browser.
